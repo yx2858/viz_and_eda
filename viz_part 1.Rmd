@@ -54,4 +54,43 @@ ggp_nyc_weather #has to run this line to graph the plot if using the second chun
 
 ## Fancy plot
 
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name)) +
+  geom_smooth(se = FALSE)
+```
+
+Plot with facets
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .3) +
+  geom_smooth() +
+  facet_grid(. ~ name)
+```
+
+let's try a different plot, temps are boring
+
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
+  geom_point(aes(size = prcp), alpha = .3) +
+  geom_smooth() +
+  facet_grid(. ~ name)
+```
+
+try assigning a specific color
+
+```{r}
+weather_df |>
+  filter(name == "CentralPark_NY") |>
+  ggplot(aes(x = date, y = tmax)) +
+  geom_point(color = "blue")
+
+weather_df |>
+  filter(name != "CentralPark_NY") |>
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point(alpha = .7, size = .5)
+```
+
+
 
